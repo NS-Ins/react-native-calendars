@@ -196,6 +196,11 @@
       "name": "todayWithSelectedStyle",
       "type": "boolean",
       "description": "Whether to show both today and selected style for a date when current date is selected."
+    },
+    {
+      "name": "changeLastWeekRowStyle",
+      "type": "boolean",
+      "description": "Whether to change the style of last row of week."
     }
   ]
 }

@@ -72,6 +72,8 @@ export interface CalendarProps extends CalendarHeaderProps, DayProps {
   allowSelectionOutOfRange?: boolean;
   /** Do not show days and show only month */
   hideDays?: boolean;
+  /** Change the style of last month */
+  changeLastWeekRowStyle?: boolean;
 }
 
 interface State {
@@ -111,7 +113,8 @@ class Calendar extends Component<CalendarProps, State> {
     headerStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.number, PropTypes.array]),
     customHeader: PropTypes.any,
     allowSelectionOutOfRange: PropTypes.bool,
-    hideDays: PropTypes.bool
+    hideDays: PropTypes.bool,
+    changeLastWeekRowStyle: PropTypes.bool
   };
   static defaultProps = {
     enableSwipeMonths: false
@@ -243,6 +246,10 @@ class Calendar extends Component<CalendarProps, State> {
   }
 
   renderWeek(days: XDate[], id: number) {
+    const { changeLastWeekRowStyle, showSixWeeks, hideExtraDays } = this.props;
+    const shouldShowSixWeeks = showSixWeeks && !hideExtraDays;
+    let idToBeChanged = shouldShowSixWeeks ? 5 : 4;
+
     const week = [];
 
     days.forEach((day: XDate, id2: number) => {
@@ -253,10 +260,8 @@ class Calendar extends Component<CalendarProps, State> {
       week.unshift(this.renderWeekNumber(days[days.length - 1].getWeek()));
     }
 
-    console.log('ID ***** ', id, days)
-
     return (
-      <View style={this.style.week} key={id}>
+      <View style={[this.style.week, (changeLastWeekRowStyle && idToBeChanged === id) ? this.style.weekLast : null]} key={id}>
         {week}
       </View>
     );
