@@ -12,6 +12,8 @@ export default function styleConstructor(theme: Theme = {}) {
       marginHorizontal: 1,
       borderRadius: 2,
       opacity: 0,
+      alignItems: 'center',
+      justifyContent: 'center',
       ...appStyle.dotStyle
     },
     visibleDot: {
@@ -31,7 +33,6 @@ export default function styleConstructor(theme: Theme = {}) {
       backgroundColor: appStyle.todayDotColor || appStyle.dotColor
     },
     dotContent: {
-      alignItems: 'center',
       color: appStyle.dotContentColor || '#fff'
     },
     // @ts-expect-error
