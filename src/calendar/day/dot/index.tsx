@@ -43,6 +43,8 @@ const Dot = ({theme, marked, disabled, inactive, color, today, selected, count}:
     }
   }
 
+  console.log('COUNT ***** ', count)
+  console.log('STYLE ***** ', style.dotContent)
   if (marked && count) {
     return (
       <View style={dotStyle}>

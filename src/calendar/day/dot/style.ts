@@ -31,6 +31,7 @@ export default function styleConstructor(theme: Theme = {}) {
       backgroundColor: appStyle.todayDotColor || appStyle.dotColor
     },
     dotContent: {
+      alignItems: 'center',
       color: appStyle.dotContentColor || '#fff'
     },
     // @ts-expect-error
