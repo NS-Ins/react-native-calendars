@@ -57,3 +57,4 @@ export const todayButtonTextColor = textLinkColor;
 export const todayButtonPosition = undefined; // right' / 'left'(default)
 
 export const weekVerticalMargin = 7;
+export const dotContentColor = undefined;

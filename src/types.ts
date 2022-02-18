@@ -86,6 +86,7 @@ export interface Theme {
   arrowHeight?: number;
   arrowWidth?: number;
   weekVerticalMargin?: number;
+  dotContentColor?: string;
   'stylesheet.calendar.header'?: {
     week: StyleProp<ViewStyle>;
   };

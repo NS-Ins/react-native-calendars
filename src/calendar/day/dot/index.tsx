@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import {View} from 'react-native';
+import {View, Text} from 'react-native';
 import styleConstructor from './style';
 import {Theme} from '../../../types';
 
@@ -12,9 +12,10 @@ export interface DotProps {
   disabled?: boolean;
   inactive?: boolean;
   today?: boolean;
+  count?: string;
 }
 
-const Dot = ({theme, marked, disabled, inactive, color, today, selected}: DotProps) => {
+const Dot = ({theme, marked, disabled, inactive, color, today, selected, count}: DotProps) => {
   const style = styleConstructor(theme);
   const dotStyle = [style.dot] as object[];
 
@@ -40,6 +41,14 @@ const Dot = ({theme, marked, disabled, inactive, color, today, selected}: DotPro
     if (color) {
       dotStyle.push({backgroundColor: color});
     }
+  }
+
+  if (marked && count) {
+    return (
+      <View style={dotStyle}>
+        <Text style={style.dotContent}>{count}</Text>
+      </View>
+    );
   }
 
   return <View style={dotStyle} />;

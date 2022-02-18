@@ -28,6 +28,13 @@ type DOT = {
   selectedDotColor?: string;
 };
 
+type DOT_LIST = {
+  key?: string;
+  color: string;
+  selectedDotColor?: string;
+  count?: string;
+};
+
 type PERIOD = {
   color: string;
   startingDay?: boolean;
@@ -52,6 +59,7 @@ export interface MarkingProps extends DotProps {
   dotColor?: string;
   //multi-dot
   dots?: DOT[];
+  dotsList? : DOT_LIST[],
   //multi-period
   periods?: PERIOD[];
   startingDay?: boolean;
@@ -87,16 +95,17 @@ export default class Marking extends Component<MarkingProps> {
       'selectedTextColor',
       'dotColor',
       'dots',
+      'dotsList',
       'periods'
     ]);
   }
 
-  getItems(items?: DOT[] | PERIOD[]) {
+  getItems(items?: DOT[] | DOT_LIST[] | PERIOD[]) {
     const {type} = this.props;
 
     if (items && Array.isArray(items) && items.length > 0) {
       // Filter out items so that we process only those which have color property
-      const validItems = filter(items, function(o: DOT | PERIOD) { return o.color; });
+      const validItems = filter(items, function(o: DOT | DOT_LIST | PERIOD) { return o.color; });
 
       return validItems.map((item, index) => {
         return type === Markings.MULTI_DOT ? this.renderDot(index, item) : this.renderPeriod(index, item);
@@ -105,10 +114,10 @@ export default class Marking extends Component<MarkingProps> {
   }
 
   renderMarkingByType() {
-    const {type, dots, periods} = this.props;
+    const {type, dots, dotsList, periods} = this.props;
     switch (type) {
       case Markings.MULTI_DOT:
-        return this.renderMultiMarkings(this.style.dots, dots);
+        return this.renderMultiMarkings(this.style.dots, dotsList ? dotsList : dots);
       case Markings.MULTI_PERIOD:
         return this.renderMultiMarkings(this.style.periods, periods);
       default:
@@ -116,7 +125,7 @@ export default class Marking extends Component<MarkingProps> {
     }
   }
 
-  renderMultiMarkings(containerStyle: object, items?: DOT[] | PERIOD[]) {
+  renderMultiMarkings(containerStyle: object, items?: DOT[] | DOT_LIST[] | PERIOD[]) {
     return <View style={containerStyle}>{this.getItems(items)}</View>;
   }
 
