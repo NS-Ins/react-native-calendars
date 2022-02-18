@@ -33,6 +33,8 @@ export interface BasicDayProps {
   testID?: string;
   /** Accessibility label */
   accessibilityLabel?: string;
+  /** Apply both selected and today styles for the day */
+  todayWithSelectedStyle?: boolean;
 }
 
 export default class BasicDay extends Component<BasicDayProps> {
@@ -47,8 +49,8 @@ export default class BasicDay extends Component<BasicDayProps> {
     onLongPress: PropTypes.func,
     date: PropTypes.object,
     disableAllTouchEventsForDisabledDays: PropTypes.bool,
-    disableAllTouchEventsForInactiveDays: PropTypes.bool
-
+    disableAllTouchEventsForInactiveDays: PropTypes.bool,
+    todayWithSelectedStyle: PropTypes.bool
   };
 
   style = styleConstructor(this.props.theme);
@@ -152,6 +154,9 @@ export default class BasicDay extends Component<BasicDayProps> {
       style.push(this.style.selectedText);
       if (selectedTextColor) {
         style.push({color: selectedTextColor});
+      }
+      if (this.props.todayWithSelectedStyle) {
+        style.push(this.style.todayText);
       }
     } else if (this.isDisabled()) {
       style.push(this.style.disabledText);
