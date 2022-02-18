@@ -152,6 +152,8 @@ export default class Marking extends Component<MarkingProps> {
     let key = index;
     let color = dotColor;
 
+    console.log('DOTPROPS ******', dotProps)
+
     if (item) {
       if (item.key) {
         key = item.key;
