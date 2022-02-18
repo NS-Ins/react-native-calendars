@@ -70,6 +70,8 @@ export interface CalendarProps extends CalendarHeaderProps, DayProps {
   customHeader?: any;
   /** Allow selection of dates before minDate or after maxDate */
   allowSelectionOutOfRange?: boolean;
+  /** Do not show days and show only month */
+  hideDays?: boolean;
 }
 
 interface State {
@@ -108,7 +110,8 @@ class Calendar extends Component<CalendarProps, State> {
     disabledByDefault: PropTypes.bool,
     headerStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.number, PropTypes.array]),
     customHeader: PropTypes.any,
-    allowSelectionOutOfRange: PropTypes.bool
+    allowSelectionOutOfRange: PropTypes.bool,
+    hideDays: PropTypes.bool
   };
   static defaultProps = {
     enableSwipeMonths: false
@@ -301,7 +304,7 @@ class Calendar extends Component<CalendarProps, State> {
   }
 
   render() {
-    const {enableSwipeMonths, style} = this.props;
+    const {enableSwipeMonths, style, hideDays } = this.props;
     const GestureComponent = enableSwipeMonths ? GestureRecognizer : View;
     const gestureProps = enableSwipeMonths ? this.swipeProps : undefined;
 
@@ -313,7 +316,7 @@ class Calendar extends Component<CalendarProps, State> {
           importantForAccessibility={this.props.importantForAccessibility} // Android
         >
           {this.renderHeader()}
-          {this.renderMonth()}
+          {!hideDays && this.renderMonth()}
         </View>
       </GestureComponent>
     );
