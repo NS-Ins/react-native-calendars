@@ -151,17 +151,22 @@ export default class Marking extends Component<MarkingProps> {
     const dotProps = extractComponentProps(Dot, this.props);
     let key = index;
     let color = dotColor;
-
-    console.log('DOTPROPS ******', dotProps)
+    let extraProps = {}
 
     if (item) {
       if (item.key) {
         key = item.key;
       }
       color = selected && item.selectedDotColor ? item.selectedDotColor : item.color;
+
+      if (item.count) {
+        extraProps = {
+          count: item.count
+        }
+      }
     }
 
-    return <Dot {...dotProps} key={key} color={color} />;
+    return <Dot {...dotProps} key={key} color={color} {...extraProps} />;
   }
 
   render() {
