@@ -253,6 +253,8 @@ class Calendar extends Component<CalendarProps, State> {
       week.unshift(this.renderWeekNumber(days[days.length - 1].getWeek()));
     }
 
+    console.log('ID ***** ', id, days)
+
     return (
       <View style={this.style.week} key={id}>
         {week}
