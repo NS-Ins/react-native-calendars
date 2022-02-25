@@ -47,8 +47,8 @@ describe('Context provider tests', () => {
       setDate(props, date, sameMonthDate, updateState, updateSources);
 
       expect(updateState).toBeCalled();
-      expect(onDateChanged).toBeCalledWith(date, updateSources);
       expect(onMonthChange).not.toBeCalled();
+      expect(onDateChanged).toBeCalledWith(date, updateSources);
     });
 
     it('Expect onMonthChange to be called when different months date passed', () => {
@@ -60,8 +60,8 @@ describe('Context provider tests', () => {
       setDate(props, date, differentMonth, updateState, updateSources);
 
       expect(updateState).toBeCalled();
-      expect(onDateChanged).toBeCalledWith(date, updateSources);
       expect(onMonthChange).toBeCalled();
+      expect(onDateChanged).toBeCalledWith(date, updateSources);
     });
   });
 
