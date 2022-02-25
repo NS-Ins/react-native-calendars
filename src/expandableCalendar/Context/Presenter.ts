@@ -37,11 +37,11 @@ class Presenter {
 
     updateState(buttonIcon);
 
+    props.onDateChanged?.(date, updateSource);
+
     if (!sameMonth(new XDate(date), new XDate(newDate))) {
       props.onMonthChange?.(xdateToData(new XDate(date)), updateSource);
     }
-
-    props.onDateChanged?.(date, updateSource);
   };
 
   setDisabled = (
