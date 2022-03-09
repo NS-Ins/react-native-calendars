@@ -144,6 +144,7 @@ class Calendar extends Component<CalendarProps, State> {
 
   updateMonth = (day: any, interaction?: (date: DateData) => void) => {
     if (sameMonth(day, this.state.currentMonth)) {
+      interaction?.(day);
       return;
     }
     this.setState({currentMonth: day.clone()}, () => {
