@@ -142,16 +142,14 @@ class Calendar extends Component<CalendarProps, State> {
     this.updateMonth(this.state.currentMonth.clone().addMonths(count, true));
   };
 
-  updateMonth = (day: any, interaction?: (date: DateData) => void) => {
+  updateMonth = (day: any) => {
     if (sameMonth(day, this.state.currentMonth)) {
-      interaction?.(day);
       return;
     }
     this.setState({currentMonth: day.clone()}, () => {
       const currMont = this.state.currentMonth.clone();
       this.props.onMonthChange?.(xdateToData(currMont));
       this.props.onVisibleMonthsChange?.([xdateToData(currMont)]);
-      interaction?.(xdateToData(currMont));
     });
   };
 
@@ -165,8 +163,10 @@ class Calendar extends Component<CalendarProps, State> {
       const shouldUpdateMonth = disableMonthChange === undefined || !disableMonthChange;
 
       if (shouldUpdateMonth) {
-        this.updateMonth(day, interaction);
-      } else if (interaction) {
+        this.updateMonth(day);
+      }
+
+      if (interaction) {
         interaction(date);
       }
     }
